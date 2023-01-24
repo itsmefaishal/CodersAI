@@ -42,12 +42,14 @@ function generateUniqueId () {
 function chatStripe (isAI, value, uniqueId) {
   return (
     `
-      <div class='wrapper ${isAI && 'ai'}'>
+      <div class="wrapper ${isAI && 'ai'}">
       <div class='chat'>
       <div class='profile'>
-      <img src='${isAI ? bot : user}' alt='${isAI ? "bot" : "user"}' />
+      <img 
+      src=${isAI ? bot : user}
+       alt="${isAI ? 'bot' : 'user'}" />
       </div>
-      <div class='message' id='${uniqueId}'>${value}</div>
+      <div class='message' id=${uniqueId}>${value}</div>
       </div>
       </div>
     `
@@ -73,7 +75,7 @@ const handleSubmit = async (e) => {
 
   loader(messageDiv);
 
-  const response = await fetch( 'https://codersai.onrender.com' ,{
+  const response = await fetch( 'https://codersai.onrender.com/' ,{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -88,9 +90,10 @@ const handleSubmit = async (e) => {
 
   if(response.ok) {
     const data = await response.json();
-    const parseData = data.bot.trim();
+    const parsedData = data.bot.trim();
 
-    typeText(messageDiv, parseData);
+    typeText(messageDiv, parsedData);
+    
 
   } else {
     const err = await response.text();
@@ -98,6 +101,7 @@ const handleSubmit = async (e) => {
     messageDiv.innerHTML = "Something went wrong";
 
     alert(err);
+    
   }
 }
 

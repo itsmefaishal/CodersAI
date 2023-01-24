@@ -1,7 +1,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.get('/', async (req,res) => {
     res.status(200).send({
-        message: 'Hello from CodeAI'
+        message: 'Hello from CodersAI'
     })
 });
 
@@ -43,7 +43,7 @@ app.post('/',async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({ error })
+        res.status(500).send(error || 'Something went wrong');
     }
 })
 
